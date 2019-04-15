@@ -12,10 +12,11 @@ void proceso::setNombreProceso(const QString &value)
 
 void proceso::agregar()
 {
-
+    this->contadorCarros++;
+    this->listaCarros.Add(listaCarros.pop().getData());
 }
 
 void proceso::quitar(carro *carroQuitar)
 {
-
+    this->contadorCarros--;
 }
