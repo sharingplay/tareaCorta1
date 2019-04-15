@@ -2,26 +2,20 @@
 
 QString proceso::getNombreProceso() const
 {
-    return nombreProceso;
+    return this->nombreProceso;
 }
 
 void proceso::setNombreProceso(const QString &value)
 {
-    nombreProceso = value;
+    this->nombreProceso = value;
 }
 
-int proceso::getTiempo() const
+void proceso::agregar()
 {
-    return tiempo;
+
 }
 
-void proceso::setTiempo(int value)
+void proceso::quitar(carro *carroQuitar)
 {
-    tiempo = value;
-}
-
-proceso::proceso()
-{
-
 
 }

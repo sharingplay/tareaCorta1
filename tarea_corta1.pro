@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
     linkedlist.cpp \
     node.cpp \
-    proceso.cpp
+    proceso.cpp \
+    carro.cpp
 
 HEADERS += \
         mainwindow.h \
-    linkedlist.h \
     node.h \
-    proceso.h
+    proceso.h \
+    carro.h \
+    linkedlist.h
 
 FORMS += \
         mainwindow.ui
