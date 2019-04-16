@@ -20,16 +20,27 @@ lineaProduccion::lineaProduccion()
     listaProcesos.Add(procesoD);
     listaProcesos.Add(procesoE);
 }
+void lineaProduccion::agregar()
+{
+
+
+}
+void lineaProduccion::liberar(){
+    for (Node* temp = listaProcesos.getFirst();temp != nullptr; temp = temp->getNext()){
+        if (((proceso*)temp->getData())->listaCarros.getFirst() == nullptr){//caso de que este vacia
+
+        }
+        else if (((proceso*)temp->getData())->listaCarros.getT() <= 3) { //caso de que hayan carros adentro
+            listaEspera.Add(((proceso*)temp->getData())->listaCarros.pop());
+        }
+
+    }
+}
 
 void lineaProduccion::llenarProcesos(){
     for (Node* procesoLlenar = listaProcesos.getFirst();procesoLlenar!= nullptr;procesoLlenar = procesoLlenar->getNext()) {
         for (int i = 0; i<3;i++) {
-           ((proceso*)procesoLlenar->getData())->agregar();
+       //    ((proceso*)procesoLlenar->getData())->agregar();
         }
     }
-}
-
-void lineaProduccion::crearListaEspera(){
-
-
 }

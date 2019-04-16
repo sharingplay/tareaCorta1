@@ -8,6 +8,14 @@ class lineaProduccion
 {
 public:
     //!
+    //! \brief lineaProduccion::agregar agrega carros a este proceso
+    //!
+    void agregar();
+    //!
+    //! \brief lineaProduccion::liberar libera un campo en cada proceso
+    //!
+    void liberar();
+    //!
     //! \brief lineaProduccion::lineaProduccion constructor de la linea de produccion con sus procesos
     //!
     lineaProduccion();
@@ -18,7 +26,6 @@ public:
     //!
     //! \brief lineaProduccion::crearListaEspera crea una lista con los carros que se van a trabajar en la linea de produccion
     //!
-    void crearListaEspera();
     static LinkedList listaProcesos;
     static LinkedList listaEspera;
     static LinkedList listaTerminada;

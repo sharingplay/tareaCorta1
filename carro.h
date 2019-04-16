@@ -9,11 +9,11 @@ public:
     //!
     //! \brief listaProcesos orden de los procesos
     //!
-    char listaProcesos[5];
+    LinkedList listaProcesos;
     //!
     //! \brief tiempo1,tiempo,tiempo3,tiempo4,tiempo5 Tiempos que dura cada proceso
     //!
-    int tiempo1,tiempo2,tiempo3,tiempo4,tiempo5;
+    LinkedList listaTiempos;
     carro(int tipo);
     carro();
 };

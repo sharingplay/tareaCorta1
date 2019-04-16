@@ -11,32 +11,6 @@ void proceso::setNombreProceso(const QString &value)
     this->nombreProceso = value;
 }
 
-void proceso::agregar()
-{
-    for (Node* temp = lineaProduccion::listaEspera.getFirst();temp!=nullptr;temp->getNext()) {
-        if (this->getNombreProceso()=="ProcesoA"){
-
-        }
-        else if (this->getNombreProceso()=="ProcesoB"){
-
-        }
-        else if (this->getNombreProceso()=="ProcesoC"){
-
-        }
-        else if (this->getNombreProceso()=="ProcesoD"){
-
-        }
-        else if (this->getNombreProceso()=="ProcesoE"){
-
-        }
-        else {
-
-        }
-    }
-    this->contadorCarros++;
-    this->listaCarros.Add(lineaProduccion::listaEspera.pop().getData());
-}
-
 void proceso::quitar(carro *carroQuitar)
 {
     this->contadorCarros--;
