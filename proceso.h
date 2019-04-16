@@ -10,11 +10,11 @@ class proceso
 {
 private:
     QString nombreProceso;
-    LinkedList listaCarros;
-    int contadorCarros = 0;
 
 public:
     proceso();
+    LinkedList listaCarros;
+    int contadorCarros = 0;
     QString getNombreProceso() const;
     void setNombreProceso(const QString &value);
     //!

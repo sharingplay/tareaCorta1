@@ -1,9 +1,7 @@
 #include "lineaproduccion.h"
 
 LinkedList* listaEspera = new LinkedList();
-//!
-//! \brief lineaProduccion::lineaProduccion constructor de la linea de produccion con sus procesos
-//!
+
 lineaProduccion::lineaProduccion()
 {
     proceso *procesoA = new proceso();
@@ -11,6 +9,11 @@ lineaProduccion::lineaProduccion()
     proceso *procesoC = new proceso();
     proceso *procesoD = new proceso();
     proceso *procesoE = new proceso();
+    procesoA->setNombreProceso("ProcesoA");
+    procesoB->setNombreProceso("ProcesoB");
+    procesoC->setNombreProceso("ProcesoC");
+    procesoD->setNombreProceso("ProcesoD");
+    procesoE->setNombreProceso("ProcesoE");
     listaProcesos.Add(procesoA);
     listaProcesos.Add(procesoB);
     listaProcesos.Add(procesoC);
@@ -18,15 +21,15 @@ lineaProduccion::lineaProduccion()
     listaProcesos.Add(procesoE);
 }
 
-//!
-//! \brief lineaProduccion::llenarProcesos llena cada "proceso" con 3 carros inicialmente
-//!
 void lineaProduccion::llenarProcesos(){
-
+    for (Node* procesoLlenar = listaProcesos.getFirst();procesoLlenar!= nullptr;procesoLlenar = procesoLlenar->getNext()) {
+        for (int i = 0; i<3;i++) {
+           ((proceso*)procesoLlenar->getData())->agregar();
+        }
+    }
 }
-//!
-//! \brief lineaProduccion::crearListaEspera crea una lista con los carros que se van a trabajar en la linea de produccion
-//!
+
 void lineaProduccion::crearListaEspera(){
+
 
 }

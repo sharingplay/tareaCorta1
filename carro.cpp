@@ -1,10 +1,12 @@
 #include "carro.h"
+#include "lineaproduccion.h"
 
 carro::carro()
 {
 
 }
 carro::carro(int tipo){
+    lineaProduccion::listaEspera.Add(this);
     switch (tipo) {
     case 1:
         this->listaProcesos[0] = 'a';
@@ -79,5 +81,4 @@ carro::carro(int tipo){
         this->tiempo5=13;
         break;
     }
-
 }
