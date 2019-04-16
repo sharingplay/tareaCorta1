@@ -27,8 +27,7 @@ Node LinkedList::pop()
     if (first != nullptr){
             Node* toReturn = first;
             first = first->getNext();
-            toReturn->setNext(first);
-            first = toReturn;
+            toReturn->setNext(nullptr);
 
             return toReturn;
         }
@@ -43,16 +42,29 @@ void LinkedList::Add(void *data)
     this->t++;
 }
 
-void *LinkedList::Delete()
-{
-    if(t>0){
-        Node* tmp=this->first;
-        this->first=this->first->getNext();
-        this->t--;
-        return tmp;
+Node* LinkedList::remove(Node* nodo){
+        Node* aux;
+        if (nodo == first){
+            first = first->getNext();
+            nodo->setNext(nullptr);
+            return nodo;
+        }
+        else if(nodo == first->getNext()){
+            aux = first->getNext();
+            first->setNext(first->getNext()->getNext());
+            aux->setNext(nullptr);
+            return aux;
+        }
+        else if(nodo == first->getNext()->getNext()){
+            aux = first->getNext()->getNext();
+            first->getNext()->setNext(nullptr);
+            return aux;
+        }
+        else {
+            qDebug()<<"No esta en la lista"<<endl;
+            return nullptr;
+        }
     }
-    return nullptr;
-}
 
 void LinkedList::Print()
 {

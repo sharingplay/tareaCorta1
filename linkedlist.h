@@ -2,7 +2,7 @@
 #define LINKEDLIST_H
 
 #include "node.h"
-
+#include <QDebug>
 
 
 class LinkedList
@@ -12,7 +12,7 @@ private:
     int t;
 public:
     void Add(void* data);
-    void* Delete();
+    Node* remove(Node* nodo);
     void Print();
     LinkedList();
     Node *getFirst() const;

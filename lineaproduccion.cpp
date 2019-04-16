@@ -1,5 +1,6 @@
 #include "lineaproduccion.h"
 
+LinkedList* listaEspera = new LinkedList();
 //!
 //! \brief lineaProduccion::lineaProduccion constructor de la linea de produccion con sus procesos
 //!

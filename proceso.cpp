@@ -1,4 +1,5 @@
 #include "proceso.h"
+#include "lineaproduccion.h"
 
 QString proceso::getNombreProceso() const
 {
@@ -13,12 +14,19 @@ void proceso::setNombreProceso(const QString &value)
 void proceso::agregar()
 {
     this->contadorCarros++;
-    this->listaCarros.Add(listaCarros.pop().getData());
+    this->listaCarros.Add(lineaProduccion::listaEspera.pop().getData());
 }
 
 void proceso::quitar(carro *carroQuitar)
 {
     this->contadorCarros--;
+
+    for (Node* temp = this->listaCarros.getFirst();temp != nullptr;temp = temp->getNext()) {
+        if (temp->getData() == carroQuitar){
+            lineaProduccion::listaEspera.Add(this->listaCarros.remove(temp));
+        }
+
+    }
 }
 void proceso::trabajar(){
 

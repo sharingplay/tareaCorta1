@@ -3,6 +3,7 @@
 #include <QString>
 #include "linkedlist.h"
 #include "carro.h"
+#include "node.h"
 
 
 class proceso
@@ -10,7 +11,7 @@ class proceso
 private:
     QString nombreProceso;
     LinkedList listaCarros;
-    int contadorCarros;
+    int contadorCarros = 0;
 
 public:
     proceso();
