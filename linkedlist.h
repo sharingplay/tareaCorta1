@@ -19,6 +19,7 @@ public:
     void setFirst(Node *value);
     int getT() const;
     void setT(int value);
+    Node pop();
 };
 
 #endif // LINKEDLIST_H
