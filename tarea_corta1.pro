@@ -30,14 +30,16 @@ SOURCES += \
     linkedlist.cpp \
     node.cpp \
     proceso.cpp \
-    carro.cpp
+    carro.cpp \
+    lineaproduccion.cpp
 
 HEADERS += \
         mainwindow.h \
     node.h \
     proceso.h \
     carro.h \
-    linkedlist.h
+    linkedlist.h \
+    lineaproduccion.h
 
 FORMS += \
         mainwindow.ui

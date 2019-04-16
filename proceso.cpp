@@ -20,3 +20,9 @@ void proceso::quitar(carro *carroQuitar)
 {
     this->contadorCarros--;
 }
+void proceso::trabajar(){
+
+    for (Node* carro = listaCarros.getFirst();carro != nullptr; carro->getNext()) {
+       //agregar logica para restar tiempo al contador de cada carro segun el proceso
+    }
+}
