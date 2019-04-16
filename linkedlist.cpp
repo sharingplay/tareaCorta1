@@ -22,6 +22,19 @@ void LinkedList::setT(int value)
     t = value;
 }
 
+Node LinkedList::pop()
+{
+    if (first != nullptr){
+            Node* toReturn = first;
+            first = first->getNext();
+            toReturn->setNext(first);
+            first = toReturn;
+
+            return toReturn;
+        }
+        return nullptr;
+}
+
 void LinkedList::Add(void *data)
 {
     Node* tmp=new Node(data);
