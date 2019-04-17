@@ -10,7 +10,7 @@ public:
     //!
     //! \brief lineaProduccion::agregar agrega carros a este proceso
     //!
-    void agregar();
+    void agregar(char nombre);
     //!
     //! \brief lineaProduccion::liberar libera un campo en cada proceso
     //!
@@ -24,8 +24,9 @@ public:
     //!
     void llenarProcesos();
     //!
-    //! \brief lineaProduccion::crearListaEspera crea una lista con los carros que se van a trabajar en la linea de produccion
+    //! \brief lineaProduccion::trabajar resta los tiempos a los carros que se estan trabajando
     //!
+    void trabajar();
     static LinkedList listaProcesos;
     static LinkedList listaEspera;
     static LinkedList listaTerminada;

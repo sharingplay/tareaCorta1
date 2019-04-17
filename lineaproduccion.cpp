@@ -9,19 +9,31 @@ lineaProduccion::lineaProduccion()
     proceso *procesoC = new proceso();
     proceso *procesoD = new proceso();
     proceso *procesoE = new proceso();
-    procesoA->setNombreProceso("ProcesoA");
-    procesoB->setNombreProceso("ProcesoB");
-    procesoC->setNombreProceso("ProcesoC");
-    procesoD->setNombreProceso("ProcesoD");
-    procesoE->setNombreProceso("ProcesoE");
+    procesoA->setNombreProceso('a');
+    procesoB->setNombreProceso('b');
+    procesoC->setNombreProceso('c');
+    procesoD->setNombreProceso('d');
+    procesoE->setNombreProceso('e');
     listaProcesos.Add(procesoA);
     listaProcesos.Add(procesoB);
     listaProcesos.Add(procesoC);
     listaProcesos.Add(procesoD);
     listaProcesos.Add(procesoE);
 }
-void lineaProduccion::agregar()
+void lineaProduccion::trabajar(){
+
+   // for (Node* carro = listaCarros.getFirst();carro != nullptr; carro->getNext()) {
+       //agregar logica para restar tiempo al contador de cada carro segun el proceso
+    //}
+}
+void lineaProduccion::agregar(char nombre)
 {
+    for (Node* temp = listaEspera.getFirst();temp!= nullptr;temp=temp->getNext()){
+        carro* x=(carro*)temp->getData();
+        if(((char*)(x->listaProcesos.getFirst()->getData()) == &nombre)){
+
+        }
+    }
 
 
 }
@@ -40,7 +52,7 @@ void lineaProduccion::liberar(){
 void lineaProduccion::llenarProcesos(){
     for (Node* procesoLlenar = listaProcesos.getFirst();procesoLlenar!= nullptr;procesoLlenar = procesoLlenar->getNext()) {
         for (int i = 0; i<3;i++) {
-       //    ((proceso*)procesoLlenar->getData())->agregar();
+       //    ((proceso*)procesoLlenar->getData())->agregar(); cambiar esta logica y validar que el carro que se agregue sea el que tenga ese proceso de primero
         }
     }
 }

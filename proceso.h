@@ -9,14 +9,14 @@
 class proceso
 {
 private:
-    QString nombreProceso;
+    char nombreProceso;
 
 public:
     proceso();
     LinkedList listaCarros;
     int contadorCarros = 0;
-    QString getNombreProceso() const;
-    void setNombreProceso(const QString &value);
+    char getNombreProceso() const;
+    void setNombreProceso(const char &value);
     //!
     //! \brief proceso::quitar saca carros de este proceso y los pasa a la lista de espera
     //! \param carroQuitar indica el carro que se desea quitar del proceso
@@ -25,7 +25,7 @@ public:
     //!
     //! \brief trabajar resta al contador de tiempo del proceso respectivo a cada carro
     //!
-    void trabajar();
+
 };
 
 #endif // PROCESO_H

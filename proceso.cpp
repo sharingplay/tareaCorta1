@@ -1,12 +1,12 @@
 #include "proceso.h"
 #include "lineaproduccion.h"
 
-QString proceso::getNombreProceso() const
+char proceso::getNombreProceso() const
 {
     return this->nombreProceso;
 }
 
-void proceso::setNombreProceso(const QString &value)
+void proceso::setNombreProceso(const char &value)
 {
     this->nombreProceso = value;
 }
@@ -22,9 +22,4 @@ void proceso::quitar(carro *carroQuitar)
 
     }
 }
-void proceso::trabajar(){
 
-    for (Node* carro = listaCarros.getFirst();carro != nullptr; carro->getNext()) {
-       //agregar logica para restar tiempo al contador de cada carro segun el proceso
-    }
-}
