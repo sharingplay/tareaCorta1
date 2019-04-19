@@ -21,11 +21,11 @@ public:
     void liberar();
     //!
     //! \brief lineaProduccion::llenarProcesos llena cada "proceso" con 3 carros inicialmente
+    //! \param carro: carro que se quiere agregar a un proceso
     //!
-    void llenarProcesos(carro* carro);
+    void llenarProcesos(carro *carro);
     //!
     //! \brief lineaProduccion::trabajar resta los tiempos a los carros que se estan trabajando
-    //! \param carro: carro que se quiere agregar a un proceso
     //!
     void trabajar();
     proceso *procesoA = new proceso();

@@ -14,7 +14,7 @@ private:
 public:
     proceso();
     LinkedList listaCarros;
-    int contadorCarros = 0;
+    int contadorCarros = listaCarros.getT();
     char getNombreProceso() const;
     void setNombreProceso(const char &value);
     //!

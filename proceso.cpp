@@ -14,7 +14,6 @@ void proceso::setNombreProceso(const char &value)
 void proceso::quitar(carro *carroQuitar)
 {
     this->contadorCarros--;
-
     for (Node* temp = this->listaCarros.getFirst();temp != nullptr;temp = temp->getNext()) {
         if (temp->getData() == carroQuitar){
             lineaProduccion::listaEspera.Add(this->listaCarros.remove(temp));
