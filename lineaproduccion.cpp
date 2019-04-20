@@ -1,6 +1,7 @@
 #include "lineaproduccion.h"
 
 LinkedList* listaEspera = new LinkedList();
+LinkedList* listaTerminada = new LinkedList();
 
 lineaProduccion::lineaProduccion()
 {
@@ -15,6 +16,7 @@ lineaProduccion::lineaProduccion()
     listaProcesosProduccion.Add(procesoD);
     listaProcesosProduccion.Add(procesoE);
 }
+
 void lineaProduccion::trabajar(){
     for(Node* aux = listaProcesosProduccion.getFirst();aux != nullptr; aux = aux->getNext()){
         proceso* procesoActual = (proceso*)aux;
@@ -31,10 +33,8 @@ void lineaProduccion::trabajar(){
             Node* a;
             a->setData((int*)(carroActual->listaTiempos.getFirst()->getData())-1);
             carroActual->listaTiempos.setFirst(a);
-
         }
     }
-
 }
 
 void lineaProduccion::agregar(char nombre)
@@ -72,6 +72,7 @@ void lineaProduccion::agregar(char nombre)
         }
     }
 }
+
 void lineaProduccion::llenarProcesos(carro* carro){
             char nombre = *(char*)carro->listaProcesos.getFirst();
              Node* nodo = new Node(carro);
@@ -127,7 +128,6 @@ void lineaProduccion::liberar(){
         else if (((proceso*)temp->getData())->contadorCarros <= 3) { //caso de que hayan carros adentro
             listaEspera.Add(((proceso*)temp->getData())->listaCarros.pop());
         }
-
     }
 }
 

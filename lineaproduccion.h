@@ -2,11 +2,16 @@
 #define LINEAPRODUCCION_H
 #include "linkedlist.h"
 #include "proceso.h"
+#include <chrono>
+#include <iostream>
 
 
 class lineaProduccion
 {
 public:
+    static lineaProduccion & getInstance(){
+        static lineaProduccion instance;
+        return instance;}
     //!
     //! \brief lineaProduccion::lineaProduccion constructor de la linea de produccion con sus procesos
     //!
@@ -36,6 +41,8 @@ public:
     static LinkedList listaProcesosProduccion;
     static LinkedList listaEspera;
     static LinkedList listaTerminada;
+    static int tiempoActual;
+    static int tiempoAnterior;
 };
 
 #endif // LINEAPRODUCCION_H
