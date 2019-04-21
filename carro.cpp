@@ -6,7 +6,7 @@ carro::carro()
 
 }
 carro::carro(int tipo){
-    lineaProduccion::listaEspera.Add(this);
+    lineaProduccion::listaEspera->Add(this);
     switch (tipo) {
     case 1:
        this->listaTiempos.Add((int*)5);
