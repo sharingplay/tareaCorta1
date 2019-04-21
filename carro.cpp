@@ -7,9 +7,10 @@ carro::carro()
 }
 carro::carro(int tipo){
     lineaProduccion::listaEspera->Add(this);
+    int x =5;
     switch (tipo) {
     case 1:
-       this->listaTiempos.Add((int*)5);
+       this->listaTiempos.Add(&x);
        this->listaTiempos.Add((int*)15);
        this->listaTiempos.Add((int*)10);
        this->listaTiempos.Add((int*)7);

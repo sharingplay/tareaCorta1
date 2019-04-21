@@ -33,11 +33,12 @@ public:
     //! \brief lineaProduccion::trabajar resta los tiempos a los carros que se estan trabajando
     //!
     void trabajar();
-    proceso *procesoA = new proceso();
-    proceso *procesoB = new proceso();
-    proceso *procesoC = new proceso();
-    proceso *procesoD = new proceso();
-    proceso *procesoE = new proceso();
+    LinkedList *a = new LinkedList();
+    proceso *procesoA = new proceso('a');
+    proceso *procesoB = new proceso('b');
+    proceso *procesoC = new proceso('c');
+    proceso *procesoD = new proceso('d');
+    proceso *procesoE = new proceso('e');
     static LinkedList *listaProcesosProduccion;
     static LinkedList *listaEspera;
     static LinkedList *listaTerminada;

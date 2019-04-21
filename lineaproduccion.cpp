@@ -7,11 +7,6 @@ LinkedList* lineaProduccion::listaProcesosProduccion = new LinkedList;
 lineaProduccion::lineaProduccion()
 {
 
-    this->procesoA->setNombreProceso('a');
-    this->procesoB->setNombreProceso('b');
-    this->procesoC->setNombreProceso('c');
-    this->procesoD->setNombreProceso('d');
-    this->procesoE->setNombreProceso('e');
     listaProcesosProduccion->Add(procesoA);
     listaProcesosProduccion->Add(procesoB);
     listaProcesosProduccion->Add(procesoC);
@@ -44,6 +39,7 @@ void lineaProduccion::agregar(char nombre)
     for (Node* temp = listaEspera->getFirst();temp!= nullptr;temp=temp->getNext()){
         carro* x = (carro*)temp->getData();
         if(*(char*)(x->listaProcesos.getFirst()->getData()) == nombre){
+            qDebug()<<x<<endl;
             switch (nombre) {
             case 'a':
                 if(procesoA->contadorCarros < 3){

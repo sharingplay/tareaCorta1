@@ -12,7 +12,7 @@ private:
     char nombreProceso;
 
 public:
-    proceso();
+    proceso(char);
     LinkedList listaCarros;
     int contadorCarros = listaCarros.getT();
     char getNombreProceso() const;
