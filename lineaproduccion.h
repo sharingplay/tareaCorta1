@@ -38,9 +38,9 @@ public:
     proceso *procesoC = new proceso();
     proceso *procesoD = new proceso();
     proceso *procesoE = new proceso();
-    static LinkedList listaProcesosProduccion;
-    static LinkedList listaEspera;
-    static LinkedList listaTerminada;
+    static LinkedList *listaProcesosProduccion;
+    static LinkedList *listaEspera;
+    static LinkedList *listaTerminada;
     static int tiempoActual;
     static int tiempoAnterior;
 };
