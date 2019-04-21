@@ -2,11 +2,18 @@
 #define CARRO_H
 #include "linkedlist.h"
 
+
 class carro
 {
 public:
-    char listaProcesos[5];
-    int tiempo1,tiempo2,tiempo3,tiempo4,tiempo5;
+    //!
+    //! \brief listaProcesos orden de los procesos
+    //!
+    LinkedList listaProcesos;
+    //!
+    //! \brief tiempo1,tiempo,tiempo3,tiempo4,tiempo5 Tiempos que dura cada proceso
+    //!
+    LinkedList listaTiempos;
     carro(int tipo);
     carro();
 };

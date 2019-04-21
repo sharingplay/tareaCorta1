@@ -3,23 +3,20 @@
 #include <QString>
 #include "linkedlist.h"
 #include "carro.h"
+#include "node.h"
 
 
 class proceso
 {
 private:
-    QString nombreProceso;
-    LinkedList listaCarros;
-    int contadorCarros;
+    char nombreProceso;
 
 public:
     proceso();
-    QString getNombreProceso() const;
-    void setNombreProceso(const QString &value);
-    //!
-    //! \brief proceso::agregar agrega carros a este proceso
-    //!
-    void agregar();
+    LinkedList listaCarros;
+    int contadorCarros = listaCarros.getT();
+    char getNombreProceso() const;
+    void setNombreProceso(const char &value);
     //!
     //! \brief proceso::quitar saca carros de este proceso y los pasa a la lista de espera
     //! \param carroQuitar indica el carro que se desea quitar del proceso
@@ -28,7 +25,7 @@ public:
     //!
     //! \brief trabajar resta al contador de tiempo del proceso respectivo a cada carro
     //!
-    void trabajar();
+
 };
 
 #endif // PROCESO_H
