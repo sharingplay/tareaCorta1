@@ -8,6 +8,12 @@
 
 class lineaProduccion
 {
+private:
+    char ax = 'a';
+    char b = 'b';
+    char c = 'c';
+    char d = 'd';
+    char e = 'e';
 public:
     static lineaProduccion & getInstance(){
         static lineaProduccion instance;
@@ -34,11 +40,11 @@ public:
     //!
     void trabajar();
     LinkedList *a = new LinkedList();
-    proceso *procesoA = new proceso('a');
-    proceso *procesoB = new proceso('b');
-    proceso *procesoC = new proceso('c');
-    proceso *procesoD = new proceso('d');
-    proceso *procesoE = new proceso('e');
+    proceso *procesoA = new proceso(&ax);
+    proceso *procesoB = new proceso(&b);
+    proceso *procesoC = new proceso(&c);
+    proceso *procesoD = new proceso(&d);
+    proceso *procesoE = new proceso(&e);
     static LinkedList *listaProcesosProduccion;
     static LinkedList *listaEspera;
     static LinkedList *listaTerminada;

@@ -17,5 +17,6 @@ public:
     LinkedList listaTiempos;
     carro(int tipo);
     carro();
+
 };
 #endif // CARRO_H
