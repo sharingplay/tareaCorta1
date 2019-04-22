@@ -16,14 +16,14 @@ lineaProduccion::lineaProduccion()
 
 void lineaProduccion::trabajar(){
     for(Node* aux = listaProcesosProduccion->getFirst();aux != nullptr; aux = aux->getNext()){
-        proceso* procesoActual = (proceso*)aux;
+        proceso* procesoActual = (proceso*)aux->getData();
 
         for(Node* temp = procesoActual->listaCarros.getFirst(); temp!= nullptr; temp = temp->getNext()){
-            carro* carroActual = (carro*)temp;
+            carro* carroActual = (carro*)temp->getData();
             if(carroActual->listaTiempos.getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
                 listaTerminada->Add(procesoActual->listaCarros.remove(temp));
             }
-            if(carroActual->listaTiempos.getFirst()->getData() == 0){//elimina el proceso terminado de la lista de procesos del carro
+            if(*((int*)carroActual->listaTiempos.getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
                 delete (carroActual->listaTiempos.pop());
                 delete (carroActual->listaProcesos.pop());
             }
