@@ -41,6 +41,23 @@ void LinkedList::Add(void *data)
     this->first=tmp;
     this->t++;
 }
+void LinkedList::Add(int valor)
+{
+    int *data = &valor;
+    Node* tmp=new Node(data);
+    tmp->setNext(this->first);
+    this->first=tmp;
+    this->t++;
+}
+
+void LinkedList::Add(char valor)
+{
+    char *data = &valor;
+    Node* tmp=new Node(data);
+    tmp->setNext(this->first);
+    this->first=tmp;
+    this->t++;
+}
 
 Node* LinkedList::remove(Node* nodo){
         Node* aux;

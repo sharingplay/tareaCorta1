@@ -20,6 +20,8 @@ public:
     int getT() const;
     void setT(int value);
     Node* pop();
+    void Add(int valor);
+    void Add(char valor);
 };
 
 #endif // LINKEDLIST_H

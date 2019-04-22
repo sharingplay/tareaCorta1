@@ -1,6 +1,7 @@
 #ifndef CARRO_H
 #define CARRO_H
 #include "linkedlist.h"
+#include "node.h"
 
 
 class carro
@@ -16,5 +17,6 @@ public:
     LinkedList listaTiempos;
     carro(int tipo);
     carro();
+
 };
 #endif // CARRO_H

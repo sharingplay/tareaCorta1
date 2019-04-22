@@ -1,12 +1,17 @@
 #include "proceso.h"
 #include "lineaproduccion.h"
 
+proceso::proceso(char *nombre)
+{
+    this->nombreProceso = *nombre;
+}
+
 char proceso::getNombreProceso() const
 {
     return this->nombreProceso;
 }
 
-void proceso::setNombreProceso(const char &value)
+void proceso::setNombreProceso(char value)
 {
     this->nombreProceso = value;
 }

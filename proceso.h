@@ -12,11 +12,11 @@ private:
     char nombreProceso;
 
 public:
-    proceso();
+    proceso(char*);
     LinkedList listaCarros;
     int contadorCarros = listaCarros.getT();
     char getNombreProceso() const;
-    void setNombreProceso(const char &value);
+    void setNombreProceso(char value);
     //!
     //! \brief proceso::quitar saca carros de este proceso y los pasa a la lista de espera
     //! \param carroQuitar indica el carro que se desea quitar del proceso
