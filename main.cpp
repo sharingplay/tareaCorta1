@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <chrono>
 #include <iostream>
+#include <chrono>
+#include <unistd.h>
 #include "lineaproduccion.h"
 using namespace std;
 
@@ -11,37 +12,28 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
-    int tipoCarro[20] ={1,2,3,4,5,6,6,5,4,3,2,1,1,2,3,2,1,2,3,5};
-    lineaProduccion* lineaEnsamblaje = new lineaProduccion();
+
+    int tipoCarro[20] ={1,2,3,4,5,6,6,5,4,3,2,1,1,2,3,2,1,2,3,5}; //Lista con el tipo de carros que se van a crear
 
     for (int i = 0; i<20;i++){//creacion carros
         carro* aux = new carro(tipoCarro[i]);
-        char* prueba = (char*)aux->listaProcesos.getFirst()->getData();
-        char pr= *prueba;
     }
+    auto start = chrono::steady_clock::now();//tiempo inicial
+    while(lineaProduccion::getInstance().listaEspera->getT() > 0){
+    auto end = chrono::steady_clock::now();
 
-    typedef chrono::high_resolution_clock Time;
-    typedef chrono::milliseconds ms;
-    typedef chrono::duration<float> fsec;
-    auto t0 = Time::now();
-    auto t1 = Time::now();
-
-    bool flag = true;
-
-
-    while(lineaProduccion::listaEspera->getT() > 0){
-        auto trans = t1-t0;
-        if (chrono::seconds(1) > trans || flag == true){
-            flag = false;
-            t0 = Time::now();
-            t1 = Time::now();
-            lineaEnsamblaje->trabajar();
+    int tiempoTranscurrido =chrono::duration_cast<chrono::seconds>(end - start).count();//tiempo transcurrido
+            cout<<tiempoTranscurrido<<endl;
+            if(tiempoTranscurrido%5==0){
+                lineaProduccion::getInstance().agregar();
+                lineaProduccion::getInstance().trabajar();
+            }
+            else if(tiempoTranscurrido%1==0){
+                lineaProduccion::getInstance().trabajar();
+            }
         }
-        else{
-            t1 = Time::now();
-        }
-    }
-    qDebug()<<lineaProduccion::listaTerminada->getT();
+
+
 
     return a.exec();
 }

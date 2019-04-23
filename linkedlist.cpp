@@ -36,30 +36,64 @@ Node* LinkedList::pop()
 
 void LinkedList::Add(void *data)
 {
-    Node* tmp=new Node(data);
-    tmp->setNext(this->first);
-    this->first=tmp;
-    this->t++;
-}
+    Node* temp = this->first;
+        if (this->first != nullptr){
+            while (temp->getNext()  != nullptr){
+                temp = temp->getNext();
+            }
+            Node* aux = new Node(data);
+            temp->setNext(aux);
+            aux->setNext(nullptr);
+            this->t++;
+        }
+        else{
+            Node* aux = new Node(data);
+            this->first = aux;
+            first->setNext(nullptr);
+        }
+    }
+
 void LinkedList::Add(int valor)
 {
     int *data = &valor;
-    Node* tmp=new Node(data);
-    tmp->setNext(this->first);
-    this->first=tmp;
-    this->t++;
-}
+    Node* temp = this->first;
+        if (this->first != nullptr){
+            while (temp->getNext()  != nullptr){
+                temp = temp->getNext();
+            }
+            Node* aux = new Node(data);
+            temp->setNext(aux);
+            aux->setNext(nullptr);
+            this->t++;
+        }
+        else{
+            Node* aux = new Node(data);
+            this->first = aux;
+            first->setNext(nullptr);
+        }
+    }
 
 void LinkedList::Add(char valor)
 {
     char *data = &valor;
-    Node* tmp=new Node(data);
-    tmp->setNext(this->first);
-    this->first=tmp;
-    this->t++;
-}
+    Node* temp = this->first;
+        if (this->first != nullptr){
+            while (temp->getNext()  != nullptr){
+                temp = temp->getNext();
+            }
+            Node* aux = new Node(data);
+            temp->setNext(aux);
+            aux->setNext(nullptr);
+            this->t++;
+        }
+        else{
+            Node* aux = new Node(data);
+            this->first = aux;
+            first->setNext(nullptr);
+        }
+    }
 
-Node* LinkedList::remove(Node* nodo){
+Node* LinkedList::remove(Node* nodo){//para la lista de carros
         Node* aux;
         if (nodo == first){
             first = first->getNext();

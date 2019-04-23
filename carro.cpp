@@ -4,11 +4,21 @@ carro::carro()
 {
 
 }
+bool carro::getIterado() const
+{
+    return iterado;
+}
+
+void carro::setIterado(bool value)
+{
+    iterado = value;
+}
+
 carro::carro(int tipo){
     lineaProduccion::listaEspera->Add(this);
     switch (tipo) {
     case 1:
-       this->listaTiempos.Add(5);
+        this->listaTiempos.Add(5);
        this->listaTiempos.Add(15);
        this->listaTiempos.Add(10);
        this->listaTiempos.Add(7);

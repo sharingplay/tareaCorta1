@@ -6,6 +6,8 @@
 
 class carro
 {
+private:
+    bool iterado = false;
 public:
     //!
     //! \brief listaProcesos orden de los procesos
@@ -18,5 +20,7 @@ public:
     carro(int tipo);
     carro();
 
+    bool getIterado() const;
+    void setIterado(bool value);
 };
 #endif // CARRO_H

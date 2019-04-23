@@ -20,12 +20,14 @@ void lineaProduccion::trabajar(){
 
         for(Node* temp = procesoActual->listaCarros.getFirst(); temp!= nullptr; temp = temp->getNext()){
             carro* carroActual = (carro*)temp->getData();
+            carroActual->listaTiempos.setFirst(carroActual->listaTiempos.getFirst()-1);
             if(carroActual->listaTiempos.getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
                 listaTerminada->Add(procesoActual->listaCarros.remove(temp));
             }
-            if(*((int*)carroActual->listaTiempos.getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
+            else if(*((int*)carroActual->listaTiempos.getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
                 delete (carroActual->listaTiempos.pop());
                 delete (carroActual->listaProcesos.pop());
+                listaEspera->Add(procesoActual->listaCarros.remove(temp));
             }
             Node* a;
             a->setData((int*)(carroActual->listaTiempos.getFirst()->getData())-1);
@@ -34,89 +36,113 @@ void lineaProduccion::trabajar(){
     }
 }
 
-void lineaProduccion::agregar(char nombre)
+void lineaProduccion::agregar()
 {
+    for(Node* nodoProceso = listaProcesosProduccion->getFirst();nodoProceso != nullptr; nodoProceso = nodoProceso->getNext()){
+        proceso* tempProceso = ((proceso*)nodoProceso->getData());
+        listaEspera->Add(tempProceso->listaCarros.pop());
+        tempProceso->listaCarros.Add(listaEspera->pop());
+    }
     for (Node* temp = listaEspera->getFirst();temp!= nullptr;temp=temp->getNext()){
         carro* x = (carro*)temp->getData();
-        if(*(char*)(x->listaProcesos.getFirst()->getData()) == nombre){
-            qDebug()<<x<<endl;
-            switch (nombre) {
+            switch (*(char*)x->listaProcesos.getFirst()) {
             case 'a':
                 if(procesoA->contadorCarros < 3){
                     procesoA->listaCarros.Add(temp);
+                }
+                else {
+                    listaEspera->Add(temp);
                 }
                 break;
             case 'b':
                 if(procesoB->contadorCarros < 3){
                     procesoB->listaCarros.Add(temp);
                 }
+                else {
+                    listaEspera->Add(temp);
+                }
                 break;
             case 'c':
                 if(procesoC->contadorCarros < 3){
                     procesoC->listaCarros.Add(temp);
+                }
+                else {
+                    listaEspera->Add(temp);
                 }
                 break;
             case 'd':
                 if(procesoD->contadorCarros < 3){
                     procesoD->listaCarros.Add(temp);
                 }
+                else {
+                    listaEspera->Add(temp);
+                }
                 break;
             case 'e':
                 if(procesoE->contadorCarros < 3){
                     procesoE->listaCarros.Add(temp);
                 }
+                else {
+                    listaEspera->Add(temp);
+                }
                 break;
             }
-        }
     }
 }
 
-void lineaProduccion::llenarProcesos(carro* carro){
-            char nombre = *(char*)carro->listaProcesos.getFirst();
-             Node* nodo = new Node(carro);
-            switch (nombre) {
-            case 'a':
-                if(procesoA->contadorCarros < 3){
-                    procesoA->listaCarros.Add(nodo);
-                }
-                else {
-                    listaEspera->Add(nodo);
-                }
-                break;
-            case 'b':
-                if(procesoB->contadorCarros < 3){
-                    procesoB->listaCarros.Add(nodo);
-                }
-                else {
-                    listaEspera->Add(nodo);
-                }
-                break;
-            case 'c':
-                if(procesoC->contadorCarros < 3){
-                    procesoC->listaCarros.Add(nodo);
-                }
-                else {
-                    listaEspera->Add(nodo);
-                }
-                break;
-            case 'd':
-                if(procesoD->contadorCarros < 3){
-                    procesoD->listaCarros.Add(nodo);
-                }
-                else {
-                    listaEspera->Add(nodo);
-                }
-                break;
-            case 'e':
-                if(procesoE->contadorCarros < 3){
-                    procesoE->listaCarros.Add(nodo);
-                }
-                else {
-                    listaEspera->Add(nodo);
-                }
-                break;
+void lineaProduccion::llenarProcesos(){
+    for (Node* aux = lineaProduccion::listaEspera->getFirst();((carro*)aux->getData())->getIterado()!=true; aux = lineaProduccion::listaEspera->getFirst()) {
+        carro* carroAux = ((carro*)aux->getData());
+        carroAux->setIterado(true);
+
+        char nombre = *(char*)carroAux->listaProcesos.getFirst();
+        Node* nodo = lineaProduccion::listaEspera->pop();
+        switch (nombre) {
+        case 'a':
+            if(procesoA->contadorCarros < 3 ){
+                procesoA->listaCarros.Add(nodo);
             }
+            else {
+                listaEspera->Add(nodo);
+            }
+            break;
+        case 'b':
+            if(procesoB->contadorCarros < 3){
+                procesoB->listaCarros.Add(nodo);
+            }
+            else {
+                listaEspera->Add(nodo);
+            }
+            break;
+        case 'c':
+            if(procesoC->contadorCarros < 3){
+                procesoC->listaCarros.Add(nodo);
+            }
+            else {
+                listaEspera->Add(nodo);
+            }
+            break;
+        case 'd':
+            if(procesoD->contadorCarros < 3){
+                procesoD->listaCarros.Add(nodo);
+            }
+            else {
+                listaEspera->Add(nodo);
+            }
+            break;
+        case 'e':
+            if(procesoE->contadorCarros < 3){
+                procesoE->listaCarros.Add(nodo);
+            }
+            else {
+                listaEspera->Add(nodo);
+            }
+            break;
         }
+    }
+
+    }
+
 
 void lineaProduccion::liberar(){
     for (Node* temp = listaProcesosProduccion->getFirst();temp != nullptr; temp = temp->getNext()){
