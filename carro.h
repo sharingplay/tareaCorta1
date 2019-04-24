@@ -10,11 +10,11 @@ public:
     //!
     //! \brief listaProcesos orden de los procesos
     //!
-    LinkedList listaProcesos;
+    LinkedList *listaProcesos = new LinkedList();
     //!
     //! \brief tiempo1,tiempo,tiempo3,tiempo4,tiempo5 Tiempos que dura cada proceso
     //!
-    LinkedList listaTiempos;
+    LinkedList *listaTiempos = new LinkedList();
     carro(int tipo);
     carro();
 

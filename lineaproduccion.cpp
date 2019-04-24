@@ -20,16 +20,16 @@ void lineaProduccion::trabajar(){
 
         for(Node* temp = procesoActual->listaCarros.getFirst(); temp!= nullptr; temp = temp->getNext()){
             carro* carroActual = (carro*)temp->getData();
-            if(carroActual->listaTiempos.getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
+            if(carroActual->listaTiempos->getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
                 listaTerminada->Add(procesoActual->listaCarros.remove(temp));
             }
-            if(*((int*)carroActual->listaTiempos.getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
-                delete (carroActual->listaTiempos.pop());
-                delete (carroActual->listaProcesos.pop());
+            if(*((int*)carroActual->listaTiempos->getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
+                delete (carroActual->listaTiempos->pop());
+                delete (carroActual->listaProcesos->pop());
             }
             Node* a;
-            a->setData((int*)(carroActual->listaTiempos.getFirst()->getData())-1);
-            carroActual->listaTiempos.setFirst(a);
+            a->setData((int*)(carroActual->listaTiempos->getFirst()->getData())-1);
+            carroActual->listaTiempos->setFirst(a);
         }
     }
 }
@@ -38,7 +38,7 @@ void lineaProduccion::agregar(char nombre)
 {
     for (Node* temp = listaEspera->getFirst();temp!= nullptr;temp=temp->getNext()){
         carro* x = (carro*)temp->getData();
-        if(*(char*)(x->listaProcesos.getFirst()->getData()) == nombre){
+        if(*(char*)(x->listaProcesos->getFirst()->getData()) == nombre){
             qDebug()<<x<<endl;
             switch (nombre) {
             case 'a':
@@ -72,7 +72,7 @@ void lineaProduccion::agregar(char nombre)
 }
 
 void lineaProduccion::llenarProcesos(carro* carro){
-            char nombre = *(char*)carro->listaProcesos.getFirst();
+            char nombre = *(char*)carro->listaProcesos->getFirst();
              Node* nodo = new Node(carro);
             switch (nombre) {
             case 'a':

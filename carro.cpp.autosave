@@ -21,7 +21,7 @@ carro::carro(int tipo){
        this->listaTiempos->Add(&_7);
        this->listaTiempos->Add(&_9);
        this->listaProcesos->Add(&a);
-       x = *(int*)(this->listaTiempos->getFirst()->getNext()->getData());
+       x = *(int*)(this->listaTiempos->getFirst()->getData());
        qDebug()<<x<<"NUMERO";
        qDebug()<<(listaTiempos);
        qDebug()<<(listaProcesos);

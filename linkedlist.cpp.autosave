@@ -43,7 +43,7 @@ void LinkedList::Add(void *data)
 }
 void LinkedList::Add(int valor)
 {
-    int value = valor;
+    this->value = valor;
     void *data = &value;
     Node* tmp=new Node(data);
     tmp->setNext(this->first);
@@ -53,8 +53,8 @@ void LinkedList::Add(int valor)
 
 void LinkedList::Add(char valor)
 {
-    char value = valor;
-    char *data = &value;
+    this->val = valor;
+    char *data = &this->val;
     Node* tmp=new Node(data);
     tmp->setNext(this->first);
     this->first=tmp;

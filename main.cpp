@@ -16,8 +16,6 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i<20;i++){//creacion carros
         carro* aux = new carro(tipoCarro[i]);
-        char* prueba = (char*)aux->listaProcesos.getFirst()->getData();
-        char pr= *prueba;
     }
 
     typedef chrono::high_resolution_clock Time;
