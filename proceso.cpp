@@ -27,3 +27,9 @@ void proceso::quitar(carro *carroQuitar)
     }
 }
 
+void proceso::agregar(Node* carro)
+{
+    this->listaCarros.Add(carro);
+    this->contadorCarros++;
+}
+

@@ -25,7 +25,7 @@ public:
     //!
     //! \brief trabajar resta al contador de tiempo del proceso respectivo a cada carro
     //!
-
+    void agregar(Node*);
 };
 
 #endif // PROCESO_H

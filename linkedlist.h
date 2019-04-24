@@ -10,6 +10,8 @@ class LinkedList
 private:
     Node* first;
     int t;
+    int value;
+    char val;
 public:
     void Add(void* data);
     Node* remove(Node* nodo);
@@ -20,8 +22,6 @@ public:
     int getT() const;
     void setT(int value);
     Node* pop();
-    void Add(int valor);
-    void Add(char valor);
 };
 
 #endif // LINKEDLIST_H

@@ -24,9 +24,9 @@ void LinkedList::setT(int value)
 
 Node* LinkedList::pop()
 {
-    if (first != nullptr){
-            Node* toReturn = first;
-            first = first->getNext();
+    if (this->first != nullptr){
+            Node* toReturn = this->first;
+            this->first = this->first->getNext();
             toReturn->setNext(nullptr);
             this->t--;
             return toReturn;
@@ -50,73 +50,43 @@ void LinkedList::Add(void *data)
             Node* aux = new Node(data);
             this->first = aux;
             first->setNext(nullptr);
+            this->t++;
         }
     }
 
-void LinkedList::Add(int valor)
-{
-    int *data = &valor;
-    Node* temp = this->first;
-        if (this->first != nullptr){
-            while (temp->getNext()  != nullptr){
-                temp = temp->getNext();
-            }
-            Node* aux = new Node(data);
-            temp->setNext(aux);
-            aux->setNext(nullptr);
-            this->t++;
-        }
-        else{
-            Node* aux = new Node(data);
-            this->first = aux;
-            first->setNext(nullptr);
-        }
-    }
 
-void LinkedList::Add(char valor)
-{
-    char *data = &valor;
-    Node* temp = this->first;
-        if (this->first != nullptr){
-            while (temp->getNext()  != nullptr){
-                temp = temp->getNext();
-            }
-            Node* aux = new Node(data);
-            temp->setNext(aux);
-            aux->setNext(nullptr);
-            this->t++;
-        }
-        else{
-            Node* aux = new Node(data);
-            this->first = aux;
-            first->setNext(nullptr);
-        }
-    }
 
 Node* LinkedList::remove(Node* nodo){//para la lista de carros
-        Node* aux;
-        if (nodo == first){
-            first = first->getNext();
-            nodo->setNext(nullptr);
-            this->t--;
-            return nodo;
-        }
-        else if(nodo == first->getNext()){
-            aux = first->getNext();
-            first->setNext(first->getNext()->getNext());
-            aux->setNext(nullptr);
-            this->t--;
-            return aux;
-        }
-        else if(nodo == first->getNext()->getNext()){
-            aux = first->getNext()->getNext();
-            first->getNext()->setNext(nullptr);
-            this->t--;
-            return aux;
-        }
-        else {
-            qDebug()<<"No esta en la lista"<<endl;
-            return nullptr;
+
+        for (Node* aux = this->first;aux!=nullptr;aux = aux->getNext()) {
+            //si es el head
+            if (nodo == first){
+                first = first->getNext();
+                nodo->setNext(nullptr);
+                this->t--;
+                return nodo;
+            }
+            //si es cualquier otro
+            else if(aux->getNext()==nodo){
+                Node* devolver;
+                devolver = aux->getNext();
+                aux->setNext(aux->getNext()->getNext());
+                devolver->setNext(nullptr);
+                this->t--;
+                return devolver;
+            }
+            //si es el final
+            else if(aux->getNext()->getNext()==nullptr && nodo == aux->getNext()){
+                Node* devolver;
+                devolver = aux->getNext();
+                aux->setNext(nullptr);
+                this->t--;
+                return devolver;
+            }
+            else {
+                qDebug()<<"No esta en la lista"<<endl;
+                return nullptr;
+            }
         }
     }
 

@@ -20,18 +20,18 @@ void lineaProduccion::trabajar(){
 
         for(Node* temp = procesoActual->listaCarros.getFirst(); temp!= nullptr; temp = temp->getNext()){
             carro* carroActual = (carro*)temp->getData();
-            carroActual->listaTiempos.setFirst(carroActual->listaTiempos.getFirst()-1);
-            if(carroActual->listaTiempos.getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
+            carroActual->listaTiempos->setFirst(carroActual->listaTiempos->getFirst()-1);
+            if(carroActual->listaTiempos->getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
                 listaTerminada->Add(procesoActual->listaCarros.remove(temp));
             }
-            else if(*((int*)carroActual->listaTiempos.getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
-                delete (carroActual->listaTiempos.pop());
-                delete (carroActual->listaProcesos.pop());
+            else if(*((int*)carroActual->listaTiempos->getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
+                delete (carroActual->listaTiempos->pop());
+                delete (carroActual->listaProcesos->pop());
                 listaEspera->Add(procesoActual->listaCarros.remove(temp));
             }
             Node* a;
-            a->setData((int*)(carroActual->listaTiempos.getFirst()->getData())-1);
-            carroActual->listaTiempos.setFirst(a);
+            a->setData((int*)(carroActual->listaTiempos->getFirst()->getData())-1);
+            carroActual->listaTiempos->setFirst(a);
         }
     }
 }
@@ -43,12 +43,14 @@ void lineaProduccion::agregar()
         listaEspera->Add(tempProceso->listaCarros.pop());
         tempProceso->listaCarros.Add(listaEspera->pop());
     }
-    for (Node* temp = listaEspera->getFirst();temp!= nullptr;temp=temp->getNext()){
+    for (Node* temp = listaEspera->pop();((carro*)temp->getData())->getIterado()!=true;temp=listaEspera->pop()){
+        qDebug()<<listaEspera->getT()<<"Lista Espera";
         carro* x = (carro*)temp->getData();
-            switch (*(char*)x->listaProcesos.getFirst()) {
+            switch (*(char*)x->listaProcesos->getFirst()->getData()) {
             case 'a':
                 if(procesoA->contadorCarros < 3){
-                    procesoA->listaCarros.Add(temp);
+                    procesoA->agregar(temp);
+                    qDebug()<<procesoA->contadorCarros<<"A";
                 }
                 else {
                     listaEspera->Add(temp);
@@ -56,7 +58,8 @@ void lineaProduccion::agregar()
                 break;
             case 'b':
                 if(procesoB->contadorCarros < 3){
-                    procesoB->listaCarros.Add(temp);
+                    procesoB->agregar(temp);
+                    qDebug()<<procesoB->contadorCarros<<"B";
                 }
                 else {
                     listaEspera->Add(temp);
@@ -64,7 +67,8 @@ void lineaProduccion::agregar()
                 break;
             case 'c':
                 if(procesoC->contadorCarros < 3){
-                    procesoC->listaCarros.Add(temp);
+                    procesoC->agregar(temp);
+                    qDebug()<<procesoC->contadorCarros<<"C";
                 }
                 else {
                     listaEspera->Add(temp);
@@ -72,7 +76,9 @@ void lineaProduccion::agregar()
                 break;
             case 'd':
                 if(procesoD->contadorCarros < 3){
-                    procesoD->listaCarros.Add(temp);
+                    procesoD->agregar(temp);
+                    qDebug()<<procesoD->contadorCarros<<"D";
+                    qDebug()<<listaEspera->getFirst()<<"LISTA ESPERA";
                 }
                 else {
                     listaEspera->Add(temp);
@@ -80,7 +86,8 @@ void lineaProduccion::agregar()
                 break;
             case 'e':
                 if(procesoE->contadorCarros < 3){
-                    procesoE->listaCarros.Add(temp);
+                    procesoE->agregar(temp);
+                    qDebug()<<procesoE->contadorCarros<<"E";
                 }
                 else {
                     listaEspera->Add(temp);
@@ -91,16 +98,15 @@ void lineaProduccion::agregar()
 }
 
 void lineaProduccion::llenarProcesos(){
-    for (Node* aux = lineaProduccion::listaEspera->getFirst();((carro*)aux->getData())->getIterado()!=true; aux = lineaProduccion::listaEspera->getFirst()) {
+    for (Node* aux = lineaProduccion::listaEspera->getFirst();((carro*)listaEspera->getFirst()->getNext()->getData())->getIterado()!=true; aux = lineaProduccion::listaEspera->getFirst()) {
         carro* carroAux = ((carro*)aux->getData());
         carroAux->setIterado(true);
-
-        char nombre = *(char*)carroAux->listaProcesos.getFirst();
+        char nombre = *(char*)carroAux->listaProcesos->getFirst()->getData();
         Node* nodo = lineaProduccion::listaEspera->pop();
         switch (nombre) {
         case 'a':
             if(procesoA->contadorCarros < 3 ){
-                procesoA->listaCarros.Add(nodo);
+                procesoA->agregar(nodo);
             }
             else {
                 listaEspera->Add(nodo);
@@ -108,7 +114,7 @@ void lineaProduccion::llenarProcesos(){
             break;
         case 'b':
             if(procesoB->contadorCarros < 3){
-                procesoB->listaCarros.Add(nodo);
+                procesoB->agregar(nodo);
             }
             else {
                 listaEspera->Add(nodo);
@@ -116,7 +122,7 @@ void lineaProduccion::llenarProcesos(){
             break;
         case 'c':
             if(procesoC->contadorCarros < 3){
-                procesoC->listaCarros.Add(nodo);
+                procesoC->agregar(nodo);
             }
             else {
                 listaEspera->Add(nodo);
@@ -124,7 +130,7 @@ void lineaProduccion::llenarProcesos(){
             break;
         case 'd':
             if(procesoD->contadorCarros < 3){
-                procesoD->listaCarros.Add(nodo);
+                procesoD->agregar(nodo);
             }
             else {
                 listaEspera->Add(nodo);
@@ -132,7 +138,7 @@ void lineaProduccion::llenarProcesos(){
             break;
         case 'e':
             if(procesoE->contadorCarros < 3){
-                procesoE->listaCarros.Add(nodo);
+                procesoE->agregar(nodo);
             }
             else {
                 listaEspera->Add(nodo);
