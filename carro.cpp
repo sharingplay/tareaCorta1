@@ -16,6 +16,7 @@ void carro::setIterado(bool value)
 
 carro::carro(int tipo){
     lineaProduccion::listaEspera->Add(this);
+    this->tipo = tipo;
     char x;
     switch (tipo) {
     case 1:

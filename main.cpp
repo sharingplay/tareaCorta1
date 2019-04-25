@@ -26,8 +26,9 @@ int main(int argc, char *argv[])
         bool flag = false;
 
         int tiempoTranscurrido =chrono::duration_cast<chrono::seconds>(end - start).count();//tiempo transcurrido
-            cout<<tiempoTranscurrido<<endl;
-            cout<<lineaProduccion::getInstance().listaTerminada->getT()<<endl;
+//            cout<<tiempoTranscurrido<<endl;
+//            cout<<lineaProduccion::getInstance().listaTerminada->getT()<<endl;
+        //qDebug()<<lineaProduccion().getInstance().listaEspera->getT()<<"SIZE";
             if (tiempoTranscurrido >0){
                 flag = true;
             }
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
             else if(tiempoTranscurrido%1==0 && flag && tiempo_anterior!=tiempoTranscurrido){
                 tiempo_anterior = tiempoTranscurrido;
                 lineaProduccion::getInstance().trabajar();
+                qDebug()<<lineaProduccion::getInstance().listaTerminada->getT();
             }
         }
 

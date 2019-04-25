@@ -22,6 +22,7 @@ void lineaProduccion::trabajar(){
             carro* carroActual = (carro*)temp->getData();
             int *segPtr = (int*) carroActual->listaTiempos->getFirst()->getData();
             *segPtr = (*segPtr) -1;
+            qDebug()<<carroActual->tipo<<*(int*)carroActual->listaTiempos->getFirst()->getData()<<*(char*)carroActual->listaProcesos->getFirst()->getData()<<carroActual->listaProcesos->getT();
             if(*((int*)carroActual->listaTiempos->getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
                 delete (carroActual->listaTiempos->pop());
                 delete (carroActual->listaProcesos->pop());
@@ -33,8 +34,9 @@ void lineaProduccion::trabajar(){
                 }
                 listaEspera->Add(procesoActual->listaCarros.remove(temp)->getData());
                 procesoActual->contadorCarros--;
-                if(carroActual->listaTiempos->getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
-                    listaTerminada->Add(procesoActual->listaCarros.remove(temp)->getData());
+                if(carroActual->listaTiempos->getT() == 0){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
+                    qDebug()<<"ENTRA A SACAR";
+                    listaTerminada->Add(listaEspera->remove(temp)->getData());
                 }
                 if (flag){
                     temp = secundario;
@@ -51,9 +53,6 @@ void lineaProduccion::agregar()
         if (tempProceso->contadorCarros > 0){
             listaEspera->Add(tempProceso->listaCarros.pop()->getData());
             tempProceso->contadorCarros--;
-        }
-        else{
-            return;
         }
     }
     for (Node* temp = listaEspera->getFirst();temp != nullptr ;temp=temp->getNext()){

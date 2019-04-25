@@ -34,6 +34,7 @@ public:
     //!
     LinkedList *listaTiempos = new LinkedList();
     carro(int tipo);
+    int tipo;
     carro();
 
     bool getIterado() const;

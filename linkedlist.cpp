@@ -67,19 +67,11 @@ Node* LinkedList::remove(Node* nodo){//para la lista de carros
                 return nodo;
             }
             //si es cualquier otro
-            else if(aux->getNext()==nodo){
+            else if(aux->getNext()->getData()==nodo->getData()){
                 Node* devolver;
                 devolver = aux->getNext();
                 aux->setNext(aux->getNext()->getNext());
                 devolver->setNext(nullptr);
-                this->t--;
-                return devolver;
-            }
-            //si es el final
-            else if(aux->getNext()->getNext()==nullptr && nodo == aux->getNext()){
-                Node* devolver;
-                devolver = aux->getNext();
-                aux->setNext(nullptr);
                 this->t--;
                 return devolver;
             }
