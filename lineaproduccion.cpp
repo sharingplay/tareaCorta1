@@ -48,8 +48,13 @@ void lineaProduccion::agregar()
 {
     for(Node* nodoProceso = listaProcesosProduccion->getFirst();nodoProceso != nullptr; nodoProceso = nodoProceso->getNext()){
         proceso* tempProceso = ((proceso*)nodoProceso->getData());
-        listaEspera->Add(tempProceso->listaCarros.pop()->getData());
-        tempProceso->contadorCarros--;
+        if (tempProceso->contadorCarros > 0){
+            listaEspera->Add(tempProceso->listaCarros.pop()->getData());
+            tempProceso->contadorCarros--;
+        }
+        else{
+            return;
+        }
     }
     for (Node* temp = listaEspera->getFirst();temp != nullptr ;temp=temp->getNext()){
         carro* x = (carro*)temp->getData();
