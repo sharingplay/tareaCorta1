@@ -31,7 +31,7 @@ Node* LinkedList::pop()
             this->t--;
             return toReturn;
         }
-        return nullptr;
+    return nullptr;
 }
 
 void LinkedList::Add(void *data)
@@ -83,11 +83,10 @@ Node* LinkedList::remove(Node* nodo){//para la lista de carros
                 this->t--;
                 return devolver;
             }
-            else {
-                qDebug()<<"No esta en la lista"<<endl;
-                return nullptr;
-            }
+
         }
+        qDebug()<<"El nodo no esta en la lista";
+        return nullptr;
     }
 
 void LinkedList::Print()

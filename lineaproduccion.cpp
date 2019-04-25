@@ -20,18 +20,26 @@ void lineaProduccion::trabajar(){
 
         for(Node* temp = procesoActual->listaCarros.getFirst(); temp!= nullptr; temp = temp->getNext()){
             carro* carroActual = (carro*)temp->getData();
-            carroActual->listaTiempos->setFirst(carroActual->listaTiempos->getFirst()-1);
-            if(carroActual->listaTiempos->getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
-                listaTerminada->Add(procesoActual->listaCarros.remove(temp));
-            }
-            else if(*((int*)carroActual->listaTiempos->getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
+            int *segPtr = (int*) carroActual->listaTiempos->getFirst()->getData();
+            *segPtr = (*segPtr) -1;
+            if(*((int*)carroActual->listaTiempos->getFirst()->getData()) == 0){//elimina el proceso terminado de la lista de procesos del carro
                 delete (carroActual->listaTiempos->pop());
                 delete (carroActual->listaProcesos->pop());
-                listaEspera->Add(procesoActual->listaCarros.remove(temp));
+                bool flag = false;
+                Node* secundario;
+                if (temp->getNext() != nullptr){
+                    secundario = temp->getNext();
+                    flag = true;
+                }
+                listaEspera->Add(procesoActual->listaCarros.remove(temp)->getData());
+                procesoActual->contadorCarros--;
+                if(carroActual->listaTiempos->getFirst() == nullptr){ //elimina el carro del proceso y lo agrega a la lista de carros terminados
+                    listaTerminada->Add(procesoActual->listaCarros.remove(temp)->getData());
+                }
+                if (flag){
+                    temp = secundario;
+                }
             }
-            Node* a;
-            a->setData((int*)(carroActual->listaTiempos->getFirst()->getData())-1);
-            carroActual->listaTiempos->setFirst(a);
         }
     }
 }
@@ -40,57 +48,72 @@ void lineaProduccion::agregar()
 {
     for(Node* nodoProceso = listaProcesosProduccion->getFirst();nodoProceso != nullptr; nodoProceso = nodoProceso->getNext()){
         proceso* tempProceso = ((proceso*)nodoProceso->getData());
-        listaEspera->Add(tempProceso->listaCarros.pop());
-        tempProceso->listaCarros.Add(listaEspera->pop());
+        listaEspera->Add(tempProceso->listaCarros.pop()->getData());
+        tempProceso->contadorCarros--;
     }
-    for (Node* temp = listaEspera->pop();((carro*)temp->getData())->getIterado()!=true;temp=listaEspera->pop()){
-        qDebug()<<listaEspera->getT()<<"Lista Espera";
+    for (Node* temp = listaEspera->getFirst();temp != nullptr ;temp=temp->getNext()){
         carro* x = (carro*)temp->getData();
+        Node* aux;
+        bool flag = false;
             switch (*(char*)x->listaProcesos->getFirst()->getData()) {
             case 'a':
                 if(procesoA->contadorCarros < 3){
-                    procesoA->agregar(temp);
-                    qDebug()<<procesoA->contadorCarros<<"A";
-                }
-                else {
-                    listaEspera->Add(temp);
+                    if (temp->getNext() != nullptr){
+                        aux = temp->getNext();
+                        flag = true;
+                    }
+                    procesoA->agregar(listaEspera->remove(temp));
+                    if (flag){
+                        temp = aux;
+                    }
                 }
                 break;
             case 'b':
                 if(procesoB->contadorCarros < 3){
-                    procesoB->agregar(temp);
-                    qDebug()<<procesoB->contadorCarros<<"B";
-                }
-                else {
-                    listaEspera->Add(temp);
+                    if (temp->getNext() != nullptr){
+                        aux = temp->getNext();
+                        flag = true;
+                    }
+                    procesoB->agregar(listaEspera->remove(temp));
+                    if (flag){
+                        temp = aux;
+                    }
                 }
                 break;
             case 'c':
                 if(procesoC->contadorCarros < 3){
-                    procesoC->agregar(temp);
-                    qDebug()<<procesoC->contadorCarros<<"C";
-                }
-                else {
-                    listaEspera->Add(temp);
+                    if (temp->getNext() != nullptr){
+                        aux = temp->getNext();
+                        flag = true;
+                    }
+                    procesoC->agregar(listaEspera->remove(temp));
+                    if (flag){
+                        temp = aux;
+                    }
                 }
                 break;
             case 'd':
                 if(procesoD->contadorCarros < 3){
-                    procesoD->agregar(temp);
-                    qDebug()<<procesoD->contadorCarros<<"D";
-                    qDebug()<<listaEspera->getFirst()<<"LISTA ESPERA";
-                }
-                else {
-                    listaEspera->Add(temp);
+                    if (temp->getNext() != nullptr){
+                        aux = temp->getNext();
+                        flag = true;
+                    }
+                    procesoD->agregar(listaEspera->remove(temp));
+                    if (flag){
+                        temp = aux;
+                    }
                 }
                 break;
             case 'e':
                 if(procesoE->contadorCarros < 3){
-                    procesoE->agregar(temp);
-                    qDebug()<<procesoE->contadorCarros<<"E";
-                }
-                else {
-                    listaEspera->Add(temp);
+                    if (temp->getNext() != nullptr){
+                        aux = temp->getNext();
+                        flag = true;
+                    }
+                    procesoE->agregar(listaEspera->remove(temp));
+                    if (flag){
+                        temp = aux;
+                    }
                 }
                 break;
             }
@@ -98,7 +121,7 @@ void lineaProduccion::agregar()
 }
 
 void lineaProduccion::llenarProcesos(){
-    for (Node* aux = lineaProduccion::listaEspera->getFirst();((carro*)listaEspera->getFirst()->getNext()->getData())->getIterado()!=true; aux = lineaProduccion::listaEspera->getFirst()) {
+    for (Node* aux = lineaProduccion::listaEspera->getFirst();((carro*)listaEspera->getFirst()->getData())->getIterado()!=true; aux = lineaProduccion::listaEspera->getFirst()) {
         carro* carroAux = ((carro*)aux->getData());
         carroAux->setIterado(true);
         char nombre = *(char*)carroAux->listaProcesos->getFirst()->getData();
@@ -109,7 +132,7 @@ void lineaProduccion::llenarProcesos(){
                 procesoA->agregar(nodo);
             }
             else {
-                listaEspera->Add(nodo);
+                listaEspera->Add(nodo->getData());
             }
             break;
         case 'b':
@@ -117,7 +140,7 @@ void lineaProduccion::llenarProcesos(){
                 procesoB->agregar(nodo);
             }
             else {
-                listaEspera->Add(nodo);
+                listaEspera->Add(nodo->getData());
             }
             break;
         case 'c':
@@ -125,7 +148,7 @@ void lineaProduccion::llenarProcesos(){
                 procesoC->agregar(nodo);
             }
             else {
-                listaEspera->Add(nodo);
+                listaEspera->Add(nodo->getData());
             }
             break;
         case 'd':
@@ -133,7 +156,7 @@ void lineaProduccion::llenarProcesos(){
                 procesoD->agregar(nodo);
             }
             else {
-                listaEspera->Add(nodo);
+                listaEspera->Add(nodo->getData());
             }
             break;
         case 'e':
@@ -141,7 +164,7 @@ void lineaProduccion::llenarProcesos(){
                 procesoE->agregar(nodo);
             }
             else {
-                listaEspera->Add(nodo);
+                listaEspera->Add(nodo->getData());
             }
             break;
         }
@@ -156,7 +179,7 @@ void lineaProduccion::liberar(){
 
         }
         else if (((proceso*)temp->getData())->contadorCarros <= 3) { //caso de que hayan carros adentro
-            listaEspera->Add(((proceso*)temp->getData())->listaCarros.pop());
+            listaEspera->Add(((proceso*)temp->getData())->listaCarros.pop()->getData());
         }
     }
 }
