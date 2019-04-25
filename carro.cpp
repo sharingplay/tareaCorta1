@@ -14,8 +14,9 @@ void carro::setIterado(bool value)
     iterado = value;
 }
 
-carro::carro(int tipo){
+carro::carro(int tipo, std::string nombre){
     lineaProduccion::listaEspera->Add(this);
+    this->nombre = nombre;
     this->tipo = tipo;
     char x;
     switch (tipo) {

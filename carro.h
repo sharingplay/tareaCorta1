@@ -33,7 +33,8 @@ public:
     //! \brief tiempo1,tiempo,tiempo3,tiempo4,tiempo5 Tiempos que dura cada proceso
     //!
     LinkedList *listaTiempos = new LinkedList();
-    carro(int tipo);
+    carro(int tipo, std::string);
+    std::string nombre;
     int tipo;
     carro();
 

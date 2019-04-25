@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/imagenes">
+        <file>images/lineaProdu.png</file>
+    </qresource>
+</RCC>
